@@ -34,4 +34,38 @@ function waitTillPress(question) {
     });
 }
 
-module.exports = { loadingWalletPublic, loadingWalletPrivate, waitTillPress };
+//public/privatekey üretme
+function generateKey(lengthOfKey) {
+    let key = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567899';
+    for (let i = 0; i < lengthOfKey; i++) {
+        key += String(characters[Math.floor(Math.random() * (characters.length))]);//rastgele karakter ekle
+    }
+
+
+    return key;
+}
+
+
+
+//yeni cüzdan üretme
+function createNewWallet() {
+    //datayı alma 
+    let firstCreateData = readData();
+    let createUserName = "user" + String(Math.floor((Math.random() * 1000000000)));
+    firstCreateData[createUserName] = {
+        publicKey: generateKey(8),
+        privateKey: generateKey(10),
+        userTokenA: 0,
+        userTokenB: 0
+    };
+    writeData(firstCreateData);
+    console.table(firstCreateData[createUserName]);
+    console.log('Cüzdanınız oluşturuldu! İşte bilgileriniz.')
+
+
+
+
+}
+
+module.exports = { loadingWalletPublic, loadingWalletPrivate, waitTillPress, createNewWallet };

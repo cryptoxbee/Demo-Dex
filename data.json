@@ -15,5 +15,11 @@
     "poolTokenA": 100000,
     "poolTokenB": 100000,
     "poolK": 10000000000
+  },
+  "user999779244": {
+    "publicKey": "JAcqUV2n",
+    "privateKey": "fPvJV0iasL",
+    "userTokenA": 0,
+    "userTokenB": 0
   }
 }

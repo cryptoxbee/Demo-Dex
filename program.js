@@ -1,6 +1,6 @@
 const { resolve } = require("path");
 const readline = require("readline");
-const { loadingWalletPublic, loadingWalletPrivate, waitTillPress } = require("./menuFuncs.js");
+const { loadingWalletPublic, loadingWalletPrivate, waitTillPress, createNewWallet } = require("./menuFuncs.js");
 const { writeData, readData } = require("./fs.js");
 const { userMenu } = require("./userMenu.js");
 
@@ -9,7 +9,7 @@ let userAuth = null;
 let key = false;
 let loginScreen = [
     { anahtar: 0, seçenek: "Cüzdan Bağla" },
-    { anahtar: 1, seçenek: "Cüzdan Oluştur(Çalışmıyor)" },
+    { anahtar: 1, seçenek: "Cüzdan Oluştur" },
     { anahtar: 2, seçenek: "Havuza 10k-10k likidite ekle" },
     { anahtar: 3, seçenek: "Çıkış Yap" }
 ];
@@ -59,7 +59,7 @@ async function main() {
                 }
                 break;
             case 1: // Cüzdan Oluştur
-                console.log("Bu özellik henüz eklenmedi...");
+                createNewWallet();
                 break;
 
             case 2: // Havuz likidite ekleme
