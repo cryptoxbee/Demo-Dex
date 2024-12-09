@@ -59,6 +59,7 @@ function createNewWallet() {
         userTokenA: 0,
         userTokenB: 0
     };
+    firstCreateData.lastFaucetTimes[createUserName] = null;
     writeData(firstCreateData);
     console.table(firstCreateData[createUserName]);
     console.log('Cüzdanınız oluşturuldu! İşte bilgileriniz.')

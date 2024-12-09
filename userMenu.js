@@ -4,6 +4,7 @@ const { loadingWalletPublic, loadingWalletPrivate, waitTillPress } = require("./
 const { writeData, readData } = require("./fs.js");
 const { read } = require("fs");
 
+
 //token swap
 async function swapTokensWithPool(userAuth, sendTokenChoice, sendTokenAmount) {
     //oku
@@ -86,7 +87,8 @@ async function userMenu(userAuth) {
         { anahtar: 0, seçenek: "Takas" },
         { anahtar: 1, seçenek: "Transfer" },
         { anahtar: 2, seçenek: "Cüzdan durumu" },
-        { anahtar: 3, seçenek: "Çıkış yap" }
+        { anahtar: 3, seçenek: "100 tokenA topla" },
+        { anahtar: 4, seçenek: "Çıkış yap" }
     ];
 
     console.table(userMenuScreen);
@@ -197,8 +199,28 @@ async function userMenu(userAuth) {
             ]);
 
             break;
+        case 3://faucet tokenA topla
+            let faucetData = readData();
+            let faucetTime = new Date().getTime();//alınma süresi milisaniye cinsi
+            let faucetRight = false;//almaya hakkı varmı değişkeni
+            if (faucetData.lastFaucetTimes[userAuth] === null) {
+                faucetData.lastFaucetTimes[userAuth] = faucetTime;
+                faucetRight = true;
+            }
+            else if ((Number(faucetData.lastFaucetTimes[userAuth]) - faucetTime) >= 300000) {
+                faucetRight = true;
+            }
+            if (faucetRight) {
+                faucetData[userAuth].userTokenA += 100;
+                console.log("Cüzdanınıza başarıyla 100 tokenA eklendi!")
+            }
+            else {
+                console.log("Bir sonraki tokenA'nızı almak için bir önceki alışınız üzerinden 5 dakika geçmesi lazım.");
+            }
+            writeData(faucetData);
 
-        case 3: // Çıkış yap
+
+        case 4: // Çıkış yap
             console.log("Çıkış yapılıyor...");
         default:
             console.log("Geçersiz seçim, lütfen tekrar deneyin.");
@@ -207,7 +229,7 @@ async function userMenu(userAuth) {
 
 
 
-    if (choiceUserMenu !== 3) {
+    if (choiceUserMenu !== 4) {
         await userMenu(userAuth);
     }
 }

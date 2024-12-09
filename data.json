@@ -21,5 +21,10 @@
     "privateKey": "fPvJV0iasL",
     "userTokenA": 0,
     "userTokenB": 0
+  },
+  "lastFaucetTimes": {
+    "user1": null,
+    "user2": null,
+    "user999779244": null
   }
 }
