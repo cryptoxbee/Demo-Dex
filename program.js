@@ -30,22 +30,29 @@ async function main() {
             case 0: // Cüzdan Bağla
                 let tempUserName = null;
                 console.log("Cüzdan Bağlama işlemi başlıyor...");
+                //girdi alma
                 let publicEntry = await waitTillPress("Public keyinizi giriniz:  ");
+                //geçerli bir adres mi
                 let verifyPublicKey = loadingWalletPublic(publicEntry);
                 if (!verifyPublicKey) {
                     break;
                 }
+
+                //kullanıcının girdiği public keyin hesabını tespit etme
                 Object.entries(readData()).forEach(([objectName, object]) => {
                     if (object.publicKey === publicEntry) {
                         tempUserName = objectName;
                     }
                 });
 
+                //girdi
                 let privateEntry = await waitTillPress("Private Keyinizi giriniz:  ");
+                //geçerli private key mi
                 let verifyPrivateKey = loadingWalletPrivate(tempUserName, privateEntry);
 
                 if (verifyPrivateKey[0]) {
                     console.log("Başarıyla giriş yapıldı!");
+                    //kimlik onaylama
                     userAuth = verifyPrivateKey[1];
                 } else {
                     console.log("Yanlış giriş!");
@@ -56,26 +63,24 @@ async function main() {
                 break;
 
             case 2: // Havuz likidite ekleme
+                //datayı çekme
                 const poolData = readData();
-
-                if (!poolData.pool) {
-                    console.log("Havuz bilgileri bulunamadı, işlem durduruldu.");
-                    break;
-                }
 
                 const addedLiquidity = 10000; // Eklenecek token miktarı
 
                 console.log("Havuza çift taraflı likidite ekleniyor...");
+                //eldeki dataya ekleme
                 poolData.pool.poolTokenA += addedLiquidity;
                 poolData.pool.poolTokenB += addedLiquidity;
 
-                // Yeni K hesaplanıyor
+                // yeni k
                 poolData.pool.poolK = poolData.pool.poolTokenA * poolData.pool.poolTokenB;
 
-                // Güncellenmiş havuz verileri kaydediliyor
+                // kaydet
                 writeData(poolData);
 
                 console.log(`Başarıyla likidite eklendi. Havuzdaki yeni durum:`);
+                //mevcut durumu yazdır
                 console.table([
                     { Token: "Token A", Miktar: poolData.pool.poolTokenA },
                     { Token: "Token B", Miktar: poolData.pool.poolTokenB },
@@ -91,12 +96,12 @@ async function main() {
                 console.log("Geçersiz seçim, lütfen tekrar deneyin.");
         }
     }
-
+    //eğer belli bir kullanıcıya bağlanmışsa kullanıcı ekranınyönlendir
     if (userAuth !== null) {
         await userMenu(userAuth);
         userAuth = null;
     }
-
+    //çıkış yaptı mı?
     if (key !== 3) {
         await main();
     }

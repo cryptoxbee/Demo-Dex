@@ -1,19 +1,19 @@
 {
-    "user1": {
-        "publicKey": "1",
-        "privateKey": "1",
-        "userTokenA": 1000,
-        "userTokenB": 1000
-    },
-    "user2": {
-        "publicKey": "2",
-        "privateKey": "2",
-        "userTokenA": 1000,
-        "userTokenB": 1000
-    },
-    "pool": {
-        "poolTokenA": 100000,
-        "poolTokenB": 100000,
-        "poolK": 10000000000
-    }
+  "user1": {
+    "publicKey": "1",
+    "privateKey": "1",
+    "userTokenA": 1000,
+    "userTokenB": 1000
+  },
+  "user2": {
+    "publicKey": "2",
+    "privateKey": "2",
+    "userTokenA": 1000,
+    "userTokenB": 1000
+  },
+  "pool": {
+    "poolTokenA": 100000,
+    "poolTokenB": 100000,
+    "poolK": 10000000000
+  }
 }

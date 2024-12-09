@@ -21,7 +21,7 @@ function loadingWalletPrivate(tempUserName, entry) {
         return objectName === tempUserName && object.privateKey === entry;
     });
     // Eğer uygun kullanıcı bulunursa, kullanıcı adı (objectName) ve 'true' döndürülür
-    return user ? [true, user[0]] : [false, null];  // user[0] objectName'ı temsil eder
+    return user ? [true, user[0]] : [false, null];
 }
 
 

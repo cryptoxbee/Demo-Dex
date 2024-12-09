@@ -1,0 +1,21 @@
+{
+  "name": "demo-dex",
+  "version": "1.0.0",
+  "main": "program.js",
+  "dependencies": {
+    "ansi-regex": "^4.1.1",
+    "prompt-sync": "^4.2.0",
+    "strip-ansi": "^5.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node program.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "www.github.com/cryptoxbee/Demo-Dex"
+  },
+  "author": "cryptoxbee",
+  "license": "ISC",
+  "description": ""
+}
